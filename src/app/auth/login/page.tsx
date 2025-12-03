@@ -1,4 +1,4 @@
-// src/app/auth/login/page.tsx  ← FINAL WITH PAYOUT LINK!
+// src/app/auth/login/page.tsx  ← FINAL: I AM PASSENGER → LOGIN
 'use client';
 import Link from 'next/link';
 
@@ -11,14 +11,14 @@ export default function LoginPage() {
         </h1>
 
         <div className="backdrop-blur-2xl bg-white/10 rounded-3xl p-12 border border-white/20 shadow-2xl space-y-8">
-          {/* PASSENGER */}
-          <Link href="/passenger">
+          {/* PASSENGER BUTTON → GOES TO LOGIN */}
+          <Link href="/passenger/login">
             <button className="w-full py-6 text-3xl font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl hover:scale-105 transition-all">
               I am a Passenger
             </button>
           </Link>
 
-          {/* DRIVER */}
+          {/* DRIVER BUTTON */}
           <Link href="/driver">
             <button className="w-full py-6 text-3xl font-bold text-white bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl hover:scale-105 transition-all">
               I am a Driver
@@ -32,15 +32,8 @@ export default function LoginPage() {
             </button>
           </Link>
 
-          {/* AUTO PAYOUT CONTROL — NEW! */}
-          <Link href="/payout">
-            <button className="w-full py-6 text-3xl font-bold text-black bg-gradient-to-r from-green-400 to-emerald-600 rounded-2xl hover:scale-105 transition-all shadow-lg shadow-green-500/50">
-              Auto Payout Control (8 AM & 8 PM)
-            </button>
-          </Link>
-
           <p className="text-center text-gray-400 pt-8 text-lg">
-            Day 19 • Auto Payouts Ready
+            Click "I am a Passenger" → Login with Email or Mobile
           </p>
         </div>
       </div>
