@@ -1,28 +1,34 @@
-export default function MasterPanel() {
+// src/app/master/page.tsx  ← PROTECTED MASTER PANEL
+import { redirect } from 'next/navigation';
+
+export default function MasterAdminPanel() {
+  // Check if logged in
+  if (typeof window !== 'undefined' && !localStorage.getItem('admin-auth')) {
+    redirect('/master/login');
+  }
+
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "linear-gradient(to bottom right, #450000, #000, #300050)",
-      color: "white",
-      fontFamily: "Arial, sans-serif",
-      padding: "50px",
-      textAlign: "center"
-    }}>
-      <h1 style={{
-        fontSize: "100px",
-        background: "linear-gradient(to right, gold, red)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        marginBottom: "50px"
-      }}>
+    <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-purple-900 p-10">
+      <h1 className="text-9xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-600 mb-16">
         MASTER ADMIN PANEL
       </h1>
-      <h2 style={{fontSize: "60px", color: "#00ff00"}}>
-        YOU HAVE WON
-      </h2>
-      <p style={{fontSize: "40px", color: "#ff0066", marginTop: "100px"}}>
-        Day 18 Complete — Your Empire Is Live
-      </p>
+
+      <div className="max-w-7xl mx-auto text-center">
+        <div className="backdrop-blur-xl bg-white/10 rounded-3xl p-20 border-8 border-yellow-500/50 shadow-2xl">
+          <p className="text-6xl text-green-400 mb-10">EMPEROR AUTHENTICATED</p>
+          <p className="text-8xl font-black text-white mb-10">₹1,84,000</p>
+          <p className="text-5xl text-yellow-400">Ready for 8 AM Payout</p>
+          <button 
+            onClick={() => {
+              localStorage.removeItem('admin-auth');
+              window.location.href = '/master/login';
+            }}
+            className="mt-20 px-20 py-10 text-4xl font-bold text-black bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl"
+          >
+            Logout Emperor
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
