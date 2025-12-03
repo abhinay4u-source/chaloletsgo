@@ -1,13 +1,12 @@
-// src/app/master/page.tsx  ← FINAL REAL MASTER PANEL
-import { redirect } from 'next/navigation';
+// src/app/master/page.tsx  ← FINAL 100% REAL MASTER PANEL (NO "YOU HAVE WON")
 import LogoutButton from './LogoutButton';
-
 export const dynamic = 'force-dynamic';
 
 export default function MasterAdminPanel() {
-  // Simple client-side check (works perfectly)
+  // Simple auth check
   if (typeof window !== 'undefined' && !localStorage.getItem('admin-auth')) {
-    redirect('/master/login');
+    window.location.href = '/master/login';
+    return null;
   }
 
   const drivers = [
@@ -17,8 +16,8 @@ export default function MasterAdminPanel() {
     { name: "Sunil Yadav", score: 94, earnings: 19800, toll: 890, blocked: false },
   ];
 
-  const total = drivers.reduce((s, d) => s + d.earnings, 0);
-  const ready = drivers.filter(d => !d.blocked).reduce((s, d) => s + d.earnings, 0);
+  const total = drivers.reduce((a, b) => a + b.earnings, 0);
+  const ready = drivers.filter(d => !d.blocked).reduce((a, b) => a + b.earnings, 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-purple-900 p-10">
@@ -26,8 +25,7 @@ export default function MasterAdminPanel() {
         MASTER ADMIN PANEL
       </h1>
 
-      {/* TOP STATS */}
-      <div className="grid grid-cols-3 gap-10 max-w-7xl mx-auto mb-20">
+      <div className="grid grid-cols-3 gap-12 max-w-7xl mx-auto mb-20">
         <div className="backdrop-blur-xl bg-white/10 rounded-3xl p-12 border-4 border-yellow-500/50 text-center shadow-2xl">
           <p className="text-5xl text-yellow-400 mb-4">Total Earnings Today</p>
           <p className="text-9xl font-black text-white">₹{total.toLocaleString()}</p>
@@ -42,7 +40,6 @@ export default function MasterAdminPanel() {
         </div>
       </div>
 
-      {/* DRIVER LIST */}
       <div className="max-w-7xl mx-auto space-y-12">
         {drivers.map(d => (
           <div key={d.name} className={`backdrop-blur-xl rounded-3xl p-12 border-4 ${d.blocked ? 'border-red-600 bg-red-900/60' : 'border-white/20 bg-white/10'} shadow-2xl`}>
