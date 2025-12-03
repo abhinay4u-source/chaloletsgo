@@ -1,4 +1,4 @@
-// src/app/passenger/page.tsx  ← FINAL PASSENGER PORTAL!
+// src/app/passenger/page.tsx  ← FINAL LIVE PASSENGER PORTAL!
 import PassengerBooking from '@/components/PassengerBooking';
 
 export default function PassengerPortal() {
@@ -13,7 +13,7 @@ export default function PassengerPortal() {
       </div>
 
       <p className="text-center text-green-400 mt-20 text-4xl font-bold">
-        Welcome to India's Fairest Cab
+        Book India's Fairest Ride
       </p>
     </div>
   );
