@@ -1,9 +1,9 @@
-// src/app/master/page.tsx  ← FINAL 100% REAL MASTER PANEL (NO "YOU HAVE WON")
+// src/app/master/page.tsx  ← FINAL REAL MASTER PANEL (NO MORE "YOU HAVE WON")
 import LogoutButton from './LogoutButton';
 export const dynamic = 'force-dynamic';
 
 export default function MasterAdminPanel() {
-  // Simple auth check
+  // Auth check
   if (typeof window !== 'undefined' && !localStorage.getItem('admin-auth')) {
     window.location.href = '/master/login';
     return null;
