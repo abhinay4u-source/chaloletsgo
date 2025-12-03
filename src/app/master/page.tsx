@@ -1,5 +1,4 @@
-// src/app/master/page.tsx  ← FINAL REAL MASTER PANEL (NO MORE "YOU HAVE WON")
-import LogoutButton from './LogoutButton';
+// src/app/master/page.tsx  ← FINAL BULLETPROOF VERSION
 export const dynamic = 'force-dynamic';
 
 export default function MasterAdminPanel() {
@@ -18,6 +17,19 @@ export default function MasterAdminPanel() {
 
   const total = drivers.reduce((a, b) => a + b.earnings, 0);
   const ready = drivers.filter(d => !d.blocked).reduce((a, b) => a + b.earnings, 0);
+
+  // LOGOUT BUTTON DIRECTLY HERE (NO IMPORT!)
+  const LogoutButton = () => (
+    <button
+      onClick={() => {
+        localStorage.removeItem('admin-auth');
+        window.location.href = '/master/login';
+      }}
+      className="px-32 py-12 text-5xl font-bold text-black bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl hover:scale-110 transition-all shadow-2xl"
+    >
+      Logout Emperor
+    </button>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-purple-900 p-10">
