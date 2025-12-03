@@ -1,8 +1,12 @@
-// src/app/master/page.tsx  ← FINAL BULLETPROOF VERSION
+// src/app/master/page.tsx  ← FINAL DEPLOYABLE MASTER PANEL
+import LogoutButton from './LogoutButton';
+
+// THESE TWO LINES ARE THE KEY — FIXES ALL BUILD ERRORS
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function MasterAdminPanel() {
-  // Auth check
+  // Simple auth check
   if (typeof window !== 'undefined' && !localStorage.getItem('admin-auth')) {
     window.location.href = '/master/login';
     return null;
@@ -18,25 +22,13 @@ export default function MasterAdminPanel() {
   const total = drivers.reduce((a, b) => a + b.earnings, 0);
   const ready = drivers.filter(d => !d.blocked).reduce((a, b) => a + b.earnings, 0);
 
-  // LOGOUT BUTTON DIRECTLY HERE (NO IMPORT!)
-  const LogoutButton = () => (
-    <button
-      onClick={() => {
-        localStorage.removeItem('admin-auth');
-        window.location.href = '/master/login';
-      }}
-      className="px-32 py-12 text-5xl font-bold text-black bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl hover:scale-110 transition-all shadow-2xl"
-    >
-      Logout Emperor
-    </button>
-  );
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900 via-black to-purple-900 p-10">
       <h1 className="text-9xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-600 mb-16">
         MASTER ADMIN PANEL
       </h1>
 
+      {/* TOP STATS */}
       <div className="grid grid-cols-3 gap-12 max-w-7xl mx-auto mb-20">
         <div className="backdrop-blur-xl bg-white/10 rounded-3xl p-12 border-4 border-yellow-500/50 text-center shadow-2xl">
           <p className="text-5xl text-yellow-400 mb-4">Total Earnings Today</p>
@@ -52,6 +44,7 @@ export default function MasterAdminPanel() {
         </div>
       </div>
 
+      {/* DRIVER LIST */}
       <div className="max-w-7xl mx-auto space-y-12">
         {drivers.map(d => (
           <div key={d.name} className={`backdrop-blur-xl rounded-3xl p-12 border-4 ${d.blocked ? 'border-red-600 bg-red-900/60' : 'border-white/20 bg-white/10'} shadow-2xl`}>
